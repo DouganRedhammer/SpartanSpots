@@ -1,0 +1,62 @@
+﻿@model SpartanSpots.Models.Image
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Image</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ContentType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ContentType)
+            @Html.ValidationMessageFor(model => model.ContentType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Alt)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Alt)
+            @Html.ValidationMessageFor(model => model.Alt)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BusinessId, "Business")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("BusinessId", String.Empty)
+            @Html.ValidationMessageFor(model => model.BusinessId)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,101 @@
+﻿@model SpartanSpots.Models.Business
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Business</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Address)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Address)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.City)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.City)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.State)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.State)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PhoneNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PhoneNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Category)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Category)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ZipCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ZipCode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Hours)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Hours)
+    </div>
+</fieldset>
+
+<div class="display-field">
+@foreach (var item in Model.Images)
+{
+     <img width="200" height="200" src="@Url.Action("../Image/GetImage", new { id = item.Id })" />
+}
+</div>
+<div class="display-label">
+   <p>Reviews</p>
+</div>
+
+@foreach (var item in Model.Reviews)
+{
+    <div class="display-field">
+        @Html.DisplayFor(modelItem => item.User)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(modelItem => item.Rating)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(modelItem => item.DateCreated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(modelItem => item.Comment)
+    </div>
+    <div class="display-field">
+        <hr />
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Write Review","../Review/Create", new { id=Model.Id })|
+    @Html.ActionLink("Back to List", "Index")
+</p>
