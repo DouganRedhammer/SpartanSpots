@@ -16,6 +16,7 @@ namespace SpartanSpots.Controllers
 {
     public class BusinessController : Controller
     {
+        
         private UsersContext db = new UsersContext();
 
         //
@@ -23,9 +24,6 @@ namespace SpartanSpots.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            
-            ViewBag.TopThreeResturaunts = this.topThreeResturaunts();
-            ViewBag.TopThreeBars = this.topThreeBars();
             return View(db.Businesses.ToList());
         }
 
@@ -155,16 +153,20 @@ namespace SpartanSpots.Controllers
 
         [Authorize]
         [HttpGet]
-        public String topThreeResturaunts()
+        public ActionResult TopThreeRatedRestaurants()
         {
-            return "Top resturaunts not implemented yet.";
+            var m =
+            ViewData.Model = db.Businesses.Where(x => x.Category.Contains("Restaurant")).Take(1);
+            return View(m);
         }
 
         [Authorize]
         [HttpGet]
-        public String topThreeBars()
+        public ActionResult TopThreeRatedBars()
         {
-            return "Top bar not implemented yet.";
+
+            var model = db.Businesses.Where(x => x.Category.Contains("Bar")).Take(3);
+            return View("TopThreeRatedBars");
         }
 
         [Authorize]

@@ -32,5 +32,23 @@ namespace SpartanSpots.Helpers
             return (string.Format("{0} out of 5. {1}", totalRating, numOfReviews));
 
         }
+
+        public static List<Business> TopThreeRatedRestaurants()
+        {
+            UsersContext db = new UsersContext();
+            
+            var m = db.Businesses.Where(x => x.Category.Contains("Restaurant")).Take(3);
+            List<Business> r = m.ToList(); 
+            return r;
+        }
+        public static List<Business> TopThreeRatedBars()
+        {
+            UsersContext db = new UsersContext();
+
+            var m = db.Businesses.Where(x => x.Category.Contains("Bar")).Take(3);
+
+            List<Business> r = m.ToList();
+            return r;
+        }
     }
 }

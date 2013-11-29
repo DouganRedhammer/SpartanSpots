@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #fff;
+    background-color: #106FA7;
     border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
@@ -14,6 +14,25 @@ body {
     padding: 0;
 }
 
+ input[type="submit"].search-button
+{
+		margin: 0;
+		padding: 0;
+		width:25px;
+		height:25px;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size:14px;
+		font-weight:bold;
+		outline: none;
+		cursor: pointer;
+		text-align: center;
+		text-decoration: none;
+		color: #ffffff  !important;
+		border: solid 1px #0076a3; border-right:0px;
+		background-image:url("../Images/search.gif") !important;
+        background-repeat: no-repeat;
+
+}
 a {
     color: #333;
     outline: none;
@@ -25,6 +44,11 @@ a {
     a:link, a:visited,
     a:active, a:hover {
         color: #333;
+    }
+
+       #login a:link, #login a:visited,
+   #login a:active, #login a:hover {
+        color: #E5AB3D;
     }
 
     a:hover {
@@ -137,7 +161,7 @@ footer {
 
 .site-title a, .site-title a:hover, .site-title a:active {
     background: none;
-    color: #c8c8c8;
+    color: #EEA82F;
     outline: none;
     text-decoration: none;
 }
@@ -153,7 +177,7 @@ footer {
 }
 
     #login a {
-        background-color: #d3dce0;
+        background-color: #106FA7;
         margin-left: 10px;
         margin-right: 3px;
         padding: 2px 3px;
@@ -195,7 +219,7 @@ ul#menu {
 
         ul#menu li a {
             background: none;
-            color: #999;
+            color: #EEA82F;
             text-decoration: none;
         }
 
@@ -603,6 +627,7 @@ tr.pager td {
     header .site-title {
         margin: 10px;
         text-align: center;
+        color: #EEA82F;
     }
 
     /* login */
@@ -753,4 +778,5 @@ tr.pager td {
         footer p {
             margin: 0;
         }
+
 }

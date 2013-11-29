@@ -21,10 +21,43 @@ namespace SpartanSpots.Controllers
         [HttpPost]
         public ActionResult Results(string searchText)
         {
-            // You would actually do something more useful here.
-            // This just fudges some results for displaying in the View.
-            var model = db.Businesses.Where(x => x.Name.Contains(searchText));
+
+            var model = db.Businesses.Where(x => x.Category.Contains(searchText));
             return View(model);        
+        }
+        [Authorize]
+        [HttpGet]
+        public ActionResult ListRestaurants()
+        {
+
+            var model = db.Businesses.Where(x => x.Category.Contains("Restaurant"));
+            return View(model);
+        }
+        [Authorize]
+        [HttpGet]
+        public ActionResult ListBars()
+        {
+
+            var model = db.Businesses.Where(x => x.Category.Contains("Bar"));
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult TopThreeRatedRestaurants()
+        {
+            var m =
+            ViewData.Model = db.Businesses.Where(x => x.Category.Contains("Restaurant")).Take(1);
+            return View(m);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult TopThreeRatedBars()
+        {
+
+            var model = db.Businesses.Where(x => x.Category.Contains("Bar")).Take(3);
+            return View("TopThreeRatedBars");
         }
     }
 

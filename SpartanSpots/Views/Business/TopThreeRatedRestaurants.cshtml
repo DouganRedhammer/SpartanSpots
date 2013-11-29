@@ -1,0 +1,20 @@
+﻿@model IEnumerable<SpartanSpots.Models.Business>
+@using SpartanSpots.Helpers
+<h2>Restaurants</h2>
+<table>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Name.ToString(), "Details", new { id=item.Id })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @HtmlExtensions.TotalRating(item.Id)
+        </td>
+    </tr>
+}
+    
+
+</table>

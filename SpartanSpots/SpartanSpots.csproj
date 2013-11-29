@@ -317,7 +317,9 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -374,6 +376,10 @@
     <Content Include="Views\Business\Listing.cshtml" />
     <Content Include="Views\Search\SearchBarPartial.cshtml" />
     <Content Include="Views\Search\Results.cshtml" />
+    <Content Include="Views\Business\TopThreeRatedBars.cshtml" />
+    <Content Include="Views\Search\ListRestaurants.cshtml" />
+    <Content Include="Views\Search\ListBars.cshtml" />
+    <Content Include="Views\Business\TopThreeRatedRestaurants.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
