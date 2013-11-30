@@ -29,6 +29,8 @@ namespace SpartanSpots.Models
         public string Category { get; set; }
         public int ZipCode { get; set; }
         public string Hours { get; set; }
+        public Nullable<int> NumOfReviews { get; set; }
+        public Nullable<double> TotalRating { get; set; }
     
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }

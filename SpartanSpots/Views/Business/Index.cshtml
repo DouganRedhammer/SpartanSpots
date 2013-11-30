@@ -5,7 +5,7 @@
     var topthreerestaurants = HtmlExtensions.TopThreeRatedRestaurants();
     var topthreebars = HtmlExtensions.TopThreeRatedBars();
 }
-
+@Html.ActionLink("Add New Business", "Create")
 <table width="80%" height="50%" border="1">
   <tr valign="top">
     <td width="358" colspan="2"><h2>Top Rated businesses</h2></td>
@@ -19,7 +19,7 @@
         @foreach (SpartanSpots.Models.Business c in topthreerestaurants)
         {
           <p>@Html.ActionLink(c.Name.ToString(), "Details", new { id=c.Id })</p>
-            <p> @HtmlExtensions.TotalRating(c.Id)</p>
+            <p> @c.TotalRating out of 5. @c.NumOfReviews Reviews</p>
         }
  </td>
      <td valign="top">
@@ -27,7 +27,7 @@
       @foreach (SpartanSpots.Models.Business c in topthreebars)
       {
         <p>@Html.ActionLink(c.Name.ToString(), "Details", new { id=c.Id })</p>
-          <p> @HtmlExtensions.TotalRating(c.Id)</p>
+          <p> @c.TotalRating out of 5. @c.NumOfReviews Reviews</p>
       }
      </td>
   </tr>

@@ -21,7 +21,7 @@ namespace SpartanSpots.Controllers
         [HttpPost]
         public ActionResult Results(string searchText)
         {
-
+            ViewBag.SearchText = searchText;
             var model = db.Businesses.Where(x => x.Category.Contains(searchText));
             return View(model);        
         }

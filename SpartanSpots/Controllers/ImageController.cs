@@ -15,7 +15,7 @@ namespace SpartanSpots.Controllers
 
         //
         // GET: /Image/
-        [Authorize]
+
         public ActionResult Index()
         {
             var images = db.Images.Include(i => i.Business);
@@ -24,7 +24,7 @@ namespace SpartanSpots.Controllers
 
         //
         // GET: /Image/Details/5
-        [Authorize]
+
         public ActionResult Details(int id = 0)
         {
             Image image = db.Images.Find(id);
@@ -37,7 +37,7 @@ namespace SpartanSpots.Controllers
 
         //
         // GET: /Image/Create
-        [Authorize]
+
         public ActionResult Create()
         {
             ViewBag.BusinessId = new SelectList(db.Businesses, "Id", "Name");
@@ -46,13 +46,12 @@ namespace SpartanSpots.Controllers
 
         //
         // POST: /Image/Create
-        [Authorize]
-        [AcceptVerbs(HttpVerbs.Post)]
+
+        [HttpPost]
         public ActionResult Create(Image image)
         {
             if (ModelState.IsValid)
             {
-
                 Image newImage = new Image();
                 HttpPostedFileBase file = Request.Files["OriginalLocation"];
                 newImage.Name = image.Name;
@@ -82,10 +81,10 @@ namespace SpartanSpots.Controllers
             return File(_image, image.ContentType);
 
         }
-
+       
         //
         // GET: /Image/Edit/5
-        [Authorize]
+
         public ActionResult Edit(int id = 0)
         {
             Image image = db.Images.Find(id);
@@ -99,7 +98,7 @@ namespace SpartanSpots.Controllers
 
         //
         // POST: /Image/Edit/5
-        [Authorize]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Image image)
@@ -116,7 +115,7 @@ namespace SpartanSpots.Controllers
 
         //
         // GET: /Image/Delete/5
-        [Authorize]
+
         public ActionResult Delete(int id = 0)
         {
             Image image = db.Images.Find(id);
@@ -129,7 +128,7 @@ namespace SpartanSpots.Controllers
 
         //
         // POST: /Image/Delete/5
-        [Authorize]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -139,7 +138,7 @@ namespace SpartanSpots.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        [Authorize]
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

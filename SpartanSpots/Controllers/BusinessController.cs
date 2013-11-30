@@ -57,6 +57,8 @@ namespace SpartanSpots.Controllers
         {
             if (ModelState.IsValid)
             {
+                business.NumOfReviews = 0;
+                business.TotalRating = 0.0;
                 db.Businesses.Add(business);
                 db.SaveChanges();
                 return RedirectToAction("Index");

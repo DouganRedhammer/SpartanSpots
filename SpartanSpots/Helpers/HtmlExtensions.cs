@@ -37,17 +37,16 @@ namespace SpartanSpots.Helpers
         {
             UsersContext db = new UsersContext();
             
-            var m = db.Businesses.Where(x => x.Category.Contains("Restaurant")).Take(3);
-            List<Business> r = m.ToList(); 
+            var m = db.Businesses.Where(x => x.Category.Contains("Restaurant"));
+            List<Business> r = m.OrderByDescending(x => x.TotalRating).Take(3).ToList(); 
             return r;
         }
         public static List<Business> TopThreeRatedBars()
         {
             UsersContext db = new UsersContext();
 
-            var m = db.Businesses.Where(x => x.Category.Contains("Bar")).Take(3);
-
-            List<Business> r = m.ToList();
+            var m = db.Businesses.Where(x => x.Category.Contains("Bar"));
+            List<Business> r = m.OrderByDescending(x => x.TotalRating).Take(3).ToList();
             return r;
         }
     }

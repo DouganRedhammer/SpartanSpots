@@ -4,42 +4,18 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.Name)</h2>
 
 <fieldset>
     <legend>Business</legend>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Address)
-    </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Address)
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.City)
-    </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.City)
+        @Html.DisplayFor(model => model.City),  @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.ZipCode)
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.State)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.State)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.PhoneNumber)
-    </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.PhoneNumber)
     </div>
@@ -48,16 +24,11 @@
          @Html.DisplayNameFor(model => model.Category)
     </div>
     <div class="display-field">
+        Meta Data
+    </div>
+        <div class="display-field">
         @Html.DisplayFor(model => model.Category)
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ZipCode)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ZipCode)
-    </div>
-
     <div class="display-label">
          @Html.DisplayNameFor(model => model.Hours)
     </div>
@@ -65,17 +36,18 @@
         @Html.DisplayFor(model => model.Hours)
     </div>
 </fieldset>
-
+@Html.ActionLink("Add photos","../Image/Create", new { id=Model.Id })
 <div class="display-field">
 @foreach (var item in Model.Images)
 {
      <img width="200" height="200" src="@Url.Action("../Image/GetImage", new { id = item.Id })" />
 }
 </div>
+<hr />
 <div class="display-label">
    <p>Reviews</p>
 </div>
-
+<hr />
 @foreach (var item in Model.Reviews)
 {
     <div class="display-field">

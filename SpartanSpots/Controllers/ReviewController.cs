@@ -53,6 +53,19 @@ namespace SpartanSpots.Controllers
         {
             if (ModelState.IsValid)
             {
+                //update Business TotalRating and NumOfReviews
+                Business business = db.Businesses.Find(review.BusinessId);
+                if (business.NumOfReviews == null)
+                    business.NumOfReviews = 0;
+                if (business.TotalRating == null)
+                    business.TotalRating = 0.0;
+                double? prevNum = business.TotalRating * business.NumOfReviews;
+                double numRev = (double)business.NumOfReviews++;
+                double numerator = (double)(prevNum + review.Rating);
+                double newRating = (double)(numerator/(numRev+1));
+                business.TotalRating = Math.Round(newRating, 2, MidpointRounding.AwayFromZero);
+
+
                 review.User = User.Identity.Name;
                 review.DateCreated = DateTime.Now;
                 db.Reviews.Add(review);
