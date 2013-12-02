@@ -1,38 +1,58 @@
 ﻿@model IEnumerable<SpartanSpots.Models.Business>
+@using SpartanSpots.Helpers
+@{
+    ViewBag.Title = "Results";
+    var topthreerestaurants = HtmlExtensions.TopThreeRatedRestaurants();
+    var topthreebars = HtmlExtensions.TopThreeRatedBars();
+}
 
-<table>
-@foreach (var item in Model) {
-    <tr>
+<table width="80%" height="50%" border="1">
+  <tr valign="top">
+    <td width="358" colspan="2"><h2>Search Results for: @ViewBag.SearchText</h2></td>
+    <td width="300">&nbsp;</td>
+  </tr>
+  <tr valign="top">
+    <td valign="top"><p>@Html.ActionLink("Resturaunts", "../Search/ListRestaurants")</p>
+    <p>@Html.ActionLink("Bars", "../Search/ListBars")</p></td>
+    <td valign="top"> 
+
+        <table>
+            
+        @foreach (var item in Model)
+        {
+                <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.ActionLink(item.Name.ToString(), "../Business/Details", new { id=item.Id })
+        </td>
+        <td>
+            &nbsp;
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Address)
+            @Html.DisplayFor(modelItem => item.City),@Html.DisplayFor(modelItem => item.State) @Html.DisplayFor(modelItem => item.ZipCode)
         </td>
+</tr>
+<tr>
         <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
+<p> @item.TotalRating out of 5. @item.NumOfReviews Reviews</p>        </td>
         <td>
-            @Html.DisplayFor(modelItem => item.State)
+           &nbsp;
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZipCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hours)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.Id })
-        </td>
-    </tr>
-}
+        <td>@Html.DisplayFor(modelItem => item.PhoneNumber)        </td>
+        </tr>
+        }
+            </table>
+
+     </td>
+  </tr>
+  <tr valign="top">
+    <td>&nbsp;</td>
+     <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
 </table>
-
-
-

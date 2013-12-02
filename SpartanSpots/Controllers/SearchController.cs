@@ -42,23 +42,6 @@ namespace SpartanSpots.Controllers
             return View(model);
         }
 
-        [Authorize]
-        [HttpGet]
-        public ActionResult TopThreeRatedRestaurants()
-        {
-            var m =
-            ViewData.Model = db.Businesses.Where(x => x.Category.Contains("Restaurant")).Take(1);
-            return View(m);
-        }
-
-        [Authorize]
-        [HttpGet]
-        public ActionResult TopThreeRatedBars()
-        {
-
-            var model = db.Businesses.Where(x => x.Category.Contains("Bar")).Take(3);
-            return View("TopThreeRatedBars");
-        }
     }
 
 }

@@ -10,12 +10,12 @@ namespace SpartanSpots.Helpers
     {
         
 
-        public static string Label(int id)
+        public static string LabelBusinessName(int id)
         {
             UsersContext db = new UsersContext();
             Business business = db.Businesses.Find(id);
 
-            return(string.Format("bla bla {0}", business.Id));
+            return(string.Format("{0}", business.Name));
        
         }
 

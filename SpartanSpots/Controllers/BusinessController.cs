@@ -121,15 +121,16 @@ namespace SpartanSpots.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
         [Authorize]
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
             base.Dispose(disposing);
         }
+
         [Authorize]
         [HttpGet]
-      // [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string Search()
         {
             string name = Request["BusinessName"];
@@ -151,40 +152,6 @@ namespace SpartanSpots.Controllers
                 return "[{\"Status\":\"empty\"}]";
             else
                 return sBuilder.ToString();
-        }
-
-        [Authorize]
-        [HttpGet]
-        public ActionResult TopThreeRatedRestaurants()
-        {
-            var m =
-            ViewData.Model = db.Businesses.Where(x => x.Category.Contains("Restaurant")).Take(1);
-            return View(m);
-        }
-
-        [Authorize]
-        [HttpGet]
-        public ActionResult TopThreeRatedBars()
-        {
-
-            var model = db.Businesses.Where(x => x.Category.Contains("Bar")).Take(3);
-            return View("TopThreeRatedBars");
-        }
-
-        [Authorize]
-        [HttpGet]
-        public string CalculateRating(int id)
-        {
-            String t = id.ToString();
-            return t;
-        }
-        public ActionResult YourView(int id)
-        {
-
-            //pMomdel code here
-
-            ViewBag.BlaResult = CalculateRating(id);
-            return View();
         }
 
     }
