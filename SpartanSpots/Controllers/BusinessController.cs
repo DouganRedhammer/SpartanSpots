@@ -154,5 +154,99 @@ namespace SpartanSpots.Controllers
                 return sBuilder.ToString();
         }
 
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult JsonListBusiness()
+        {
+            var business = db.Businesses.Select(x => new
+            {
+                x.Name,
+                x.Id,
+                x.PhoneNumber,
+                x.Address,
+                x.City,
+                x.State,
+                x.ZipCode,
+                x.Hours,
+                x.TotalRating,
+                x.NumOfReviews,
+                x.Category
+            }
+                );
+            return Json(business, "text/x-json", JsonRequestBehavior.AllowGet);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult JsonTopThreeRatedRestaurants()
+        {
+            var business = db.Businesses.Select(x => new
+            {
+                x.Name,
+                x.Id,
+                x.PhoneNumber,
+                x.Address,
+                x.City,
+                x.State,
+                x.ZipCode,
+                x.Hours,
+                x.TotalRating,
+                x.NumOfReviews,
+                x.Category
+            }
+                ).Where(x => x.Category.Contains("Restaurant")).OrderByDescending(x => x.TotalRating).Take(3);
+
+            return Json(business, "text/x-json", JsonRequestBehavior.AllowGet);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult JsonTopThreeRatedBars()
+        {
+            var business = db.Businesses.Select(x => new
+            {
+                x.Name,
+                x.Id,
+                x.PhoneNumber,
+                x.Address,
+                x.City,
+                x.State,
+                x.ZipCode,
+                x.Hours,
+                x.TotalRating,
+                x.NumOfReviews,
+                x.Category
+            }
+                ).Where(x => x.Category.Contains("Bar")).OrderByDescending(x => x.TotalRating).Take(3);
+
+            return Json(business, "text/x-json", JsonRequestBehavior.AllowGet);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult JsonDetails(int id)
+        {
+            Business business = db.Businesses.Find(id);
+
+
+            if (business != null)
+                return Json(new
+                {
+
+                    name         = business.Name,
+                    id           = business.Id,
+                    phone        = business.PhoneNumber,
+                    address      = business.Address,
+                    city         = business.City,
+                    state        = business.State,
+                    zip          = business.ZipCode,
+                    hours        = business.Hours,
+                    totalRating  = business.TotalRating,
+                    numOfReviews = business.NumOfReviews,
+                    category     = business.Category
+
+                }, "text/x-json", JsonRequestBehavior.AllowGet);
+
+            else
+            {
+                return Json("Empty", "text/x-json", JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

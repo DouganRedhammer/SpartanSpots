@@ -25,6 +25,28 @@ namespace SpartanSpots.Controllers
             var model = db.Businesses.Where(x => x.Category.Contains(searchText));
             return View(model);        
         }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public ActionResult JsonSearchBusiness(string searchText)
+        {
+            var business = db.Businesses.Select(x => new
+            {
+                x.Name,
+                x.Id,
+                x.PhoneNumber,
+                x.Address,
+                x.City,
+                x.State,
+                x.ZipCode,
+                x.Hours,
+                x.Category,
+                x.TotalRating,
+                x.NumOfReviews
+            }
+                ).Where(n => n.Category.Contains(searchText));
+            return Json(business, "text/x-json", JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize]
         [HttpGet]
         public ActionResult ListRestaurants()

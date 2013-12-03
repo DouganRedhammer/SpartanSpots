@@ -77,6 +77,50 @@ namespace SpartanSpots.Controllers
             return View(review);
         }
 
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult JsonCreateReview(int id, int rating, string comment)
+        {
+            if (ModelState.IsValid)
+            {
+                //update Business TotalRating and NumOfReviews
+                Business business = db.Businesses.Find(id);
+                if (business != null)
+                {
+                    Review review = new Review();
+                    if (business.NumOfReviews == null)
+                        business.NumOfReviews = 0;
+                    if (business.TotalRating == null)
+                        business.TotalRating = 0.0;
+                    double? prevNum = business.TotalRating * business.NumOfReviews;
+                    double numRev = (double)business.NumOfReviews++;
+                    double numerator = (double)(prevNum + rating);
+                    double newRating = (double)(numerator / (numRev + 1));
+                    business.TotalRating = Math.Round(newRating, 2, MidpointRounding.AwayFromZero);
+
+
+                    review.User = User.Identity.Name;
+                    review.DateCreated = DateTime.Now;
+                    review.BusinessId = id;
+                    review.Comment = comment;
+                    review.Rating = rating;
+
+                    db.Reviews.Add(review);
+                    db.SaveChanges();
+                    return Json("true", "text/x-json", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("false", "text/x-json", JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            else
+            {
+                return Json("false", "text/x-json", JsonRequestBehavior.AllowGet);
+            }
+        }
+
         //
         // GET: /Review/Edit/5
 
@@ -139,5 +183,22 @@ namespace SpartanSpots.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult JsonListReviews(int id)
+        {
+            var review = db.Reviews.Select(x => new
+            {
+                x.User,
+                x.DateCreated,
+                x.Rating,
+                x.Comment,
+                x.BusinessId
+            }
+                ).Where(x => x.BusinessId.Equals(id));
+
+            return Json(review, "text/x-json", JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
